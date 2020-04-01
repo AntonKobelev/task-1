@@ -1,7 +1,25 @@
 let money, time, appData, mandatoryExpenditureItem1, cost1, mandatoryExpenditureItem2, cost2, budgetFor1Day;
-money = prompt("Ваш бюджет на месяц?");
-time = prompt("Введите дату в формате YYYY-MM-DD");
-appData = {moneyKey:money, timeKey: time, expenses : {}, optionalExpenses: {}, income : [], savings: false};//создаем объект для хранения данных
+
+function start () {  
+    time = prompt("Введите дату в формате YYYY-MM-DD");
+    //isNaN проверка money - возвращает true если в переменную записываются не цифры, цикл будет работать дальше
+    while(isNaN(money) || money == "" || money == null) {
+        money = +prompt("Ваш бюджет на месяц?", '');
+    }
+}
+
+start();
+
+
+appData = {
+    budget:money, 
+    timeData: time, 
+    expenses : {}, 
+    optionalExpenses: {}, 
+    income : [], 
+    savings: false};//создаем объект для хранения данных
+
+
 mandatoryExpenditureItem1 = prompt("Введите обязательную статью расходов в этом месяце");
 cost1 = prompt("Во сколько обойдется?");
 mandatoryExpenditureItem2 = prompt("Введите обязательную статью расходов в этом месяце");
