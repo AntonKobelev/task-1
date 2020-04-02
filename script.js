@@ -29,22 +29,28 @@ function chooseExpenses () {
         }
     }
 }
-
 chooseExpenses();
 
-appData.budgetFor1Day = (appData.budget / 30).toFixed(); // разделим на 30 бюджет и добавим в объект appData новое свойство budgetFor1Day и округлим
-
-alert("Ежедневный бюджет " + appData.budgetFor1Day);
-
-if (appData.budgetFor1Day < 100) {
-    console.log("Минимальный уровень достатка");
-} else if (appData.budgetFor1Day > 100 && appData.budgetFor1Day < 2000) {
-    console.log("Средний уровень достатка");
-} else if (appData.budgetFor1Day > 2000) {
-    console.log("Высокий уровень достатка");
-} else {
-    console.log("Произошла ошибка");
+function detectDayBudget(){
+    appData.budgetFor1Day = (appData.budget / 30).toFixed(); // разделим на 30 бюджет и добавим в объект appData новое свойство budgetFor1Day и округлим
+    alert("Ежедневный бюджет " + appData.budgetFor1Day);
 }
+detectDayBudget();
+
+function detectLevel(){
+    if (appData.budgetFor1Day < 100) {
+        console.log("Минимальный уровень достатка");
+    } else if (appData.budgetFor1Day > 100 && appData.budgetFor1Day < 2000) {
+        console.log("Средний уровень достатка");
+    } else if (appData.budgetFor1Day > 2000) {
+        console.log("Высокий уровень достатка");
+    } else {
+        console.log("Произошла ошибка");
+    }
+}
+
+detectLevel();
+
 
 //функция для расчета накопления с депозита
 function checkSavings() {
@@ -57,3 +63,11 @@ function checkSavings() {
 }
 
 checkSavings();
+
+function chooseOptExpenses(){ //создаем функцию, которая задает пользователю 3 вопроса.
+    for (i = 1; i < 4; i++){
+        appData.optionalExpenses[i] = prompt("Статья необязательных расходов?");
+    }
+}
+
+chooseOptExpenses();
