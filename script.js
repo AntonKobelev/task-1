@@ -14,7 +14,7 @@ appData = {  //создаем объект для хранения данных
     timeData: time, 
     expenses : {}, 
     optionalExpenses: {}, 
-    income : [], 
+    income : [], //сюда будет заполняться дополнительный доход, который можно получить.
     savings: true,
     chooseExpenses: function () {
         for (let i = 0; i < 2; i++) {
@@ -56,6 +56,12 @@ appData = {  //создаем объект для хранения данных
         for (i = 1; i < 4; i++){
             appData.optionalExpenses[i] = prompt("Статья необязательных расходов?");
         }
+    },
+    chooseIncome: function(){ //создаем функцию, которая спрашивает пользователя.Что принесет дополнительный доход?
+        let items = prompt("Что принесет дополнительный доход? (Перечислите через запятую)","");//совместимость с IE
+        appData.income = items.split(', ');//добавляем ответы пользователя (дробим через запятую) в массив appData, в свойство income
+        appData.income.push(prompt('Может что-то еще?'));
+        appData.income.sort();
     }
 
 };
