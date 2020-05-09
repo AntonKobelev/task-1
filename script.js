@@ -1,4 +1,4 @@
-let money, time, appData, mandatoryExpenditureItem, cost, budgetFor1Day;
+let money, time, appData, mandatoryExpenditureItem, cost, budgetFor1Day, items;
 
 function start () {  
     //isNaN проверка money - возвращает true если в переменную записываются не цифры, цикл будет работать дальше
@@ -16,7 +16,7 @@ appData = {  //создаем объект для хранения данных
     optionalExpenses: {}, 
     income : [], //сюда будет заполняться дополнительный доход, который можно получить.
     savings: true,
-    chooseExpenses: function () {
+    chooseExpenses: function () { //выберите расходы
         for (let i = 0; i < 2; i++) {
             mandatoryExpenditureItem = prompt("Введите обязательную статью расходов в этом месяце");
             cost = prompt("Во сколько обойдется?");
@@ -28,12 +28,12 @@ appData = {  //создаем объект для хранения данных
             }
         }
     },
-    detectDayBudget: function() {
+    detectDayBudget: function() { //определение дневного бюджета
         appData.budgetFor1Day = (appData.budget / 30).toFixed(); // разделим на 30 бюджет и добавим в объект appData новое свойство budgetFor1Day и округлим
         alert("Ежедневный бюджет " + appData.budgetFor1Day);
     },
 
-    detectLevel: function() {
+    detectLevel: function() { //определяем уровень достатка
         if (appData.budgetFor1Day < 100) {
             console.log("Минимальный уровень достатка");
         } else if (appData.budgetFor1Day > 100 && appData.budgetFor1Day < 2000) {
@@ -58,10 +58,15 @@ appData = {  //создаем объект для хранения данных
         }
     },
     chooseIncome: function(){ //создаем функцию, которая спрашивает пользователя.Что принесет дополнительный доход?
-        let items = prompt("Что принесет дополнительный доход? (Перечислите через запятую)","");//совместимость с IE
-        appData.income = items.split(', ');//добавляем ответы пользователя (дробим через запятую) в массив appData, в свойство income
-        appData.income.push(prompt('Может что-то еще?'));
-        appData.income.sort();
+        do {
+            items = prompt("Что принесет дополнительный доход? (Перечислите через запятую)",""); //просим пользователя ввести через запятую доходы
+            if (isNaN(items)) { // проверка , items строка?
+                appData.income = items.split(', ');//добавляем ответы пользователя (дробим через запятую) в массив appData, в свойство income
+                appData.income.push(prompt('Может что-то еще?'));//добавляем элемент в конец массива
+                appData.income.sort();
+                }
+        }
+        while (!isNaN(items) || items == "" || items == null); // спрашиваем до тех пор пока не введет строку, это число? это пустая строка, это null? (к примеру, переменная item сейчас существует, но она не имеет ни типа, ни значения)
     }
 
 };
